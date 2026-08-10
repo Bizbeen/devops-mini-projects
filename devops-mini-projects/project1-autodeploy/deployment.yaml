@@ -1,0 +1,33 @@
+# ⚠️ Before applying: replace <dockerhub-username> below with your actual Docker Hub username
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: autodeploy-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: autodeploy-app
+  template:
+    metadata:
+      labels:
+        app: autodeploy-app
+    spec:
+      containers:
+        - name: autodeploy-app
+          image: <dockerhub-username>/autodeploy-app:latest
+          ports:
+            - containerPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: autodeploy-service
+spec:
+  type: NodePort
+  selector:
+    app: autodeploy-app
+  ports:
+    - port: 5000
+      targetPort: 5000
+      nodePort: 30036
