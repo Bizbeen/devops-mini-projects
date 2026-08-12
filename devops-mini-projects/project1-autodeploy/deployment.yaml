@@ -1,4 +1,3 @@
-# ⚠️ Before applying: replace <dockerhub-username> below with your actual Docker Hub username
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -18,16 +17,16 @@ spec:
           image: <dockerhub-username>/autodeploy-app:latest
           ports:
             - containerPort: 5000
+
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: autodeploy-service
 spec:
-  type: NodePort
   selector:
     app: autodeploy-app
+  type: NodePort
   ports:
     - port: 5000
       targetPort: 5000
-      nodePort: 30036
