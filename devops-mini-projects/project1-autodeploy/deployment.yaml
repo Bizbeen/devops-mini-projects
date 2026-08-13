@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: autodeploy-app
-          image: <dockerhub-username>/autodeploy-app:latest
+          image: tulasistr/autodeploy-app:v1
           ports:
             - containerPort: 5000
 
